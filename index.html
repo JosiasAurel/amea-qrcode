@@ -92,8 +92,14 @@
           transform: scale(2) rotate(-15deg);
         }
 
+        .generator #qr-code {
+          position: relative;
+          height: 60vh;
+        }
+
         body {
           margin: 0 auto;
+          max-height: 60vh;
         }
 
         #qr-code {
@@ -102,6 +108,15 @@
 
         .generator form {
           width: 80vw;
+          position: relative;
+        }
+
+        footer {
+          position: relative;
+        }
+
+        footer, form, #qr-code {
+          top: -8vh;
         }
       }
     </style>
