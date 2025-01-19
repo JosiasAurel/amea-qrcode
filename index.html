@@ -70,7 +70,24 @@
       color: grey;
     }
 
+    #download-trigger {
+      position: relative;
+      transform: scale(1.5) rotate(-15deg);
+      border: solid 1px var(--red-primary);
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      justify-content: center; align-items: center;
+      left: -2em;
+      background-color: white;
+    }
+
     @media screen and (max-width: 600px) {
+      #download-trigger {
+        transform: scale(2) rotate(-15deg);
+      }
+
       body {
         margin: 0 auto;
       }
@@ -92,7 +109,12 @@
       <h2> QR Code </h2>
     </header>
     <div class='generator'>
-   <div id='qr-code'></div> 
+   <div id='qr-code'>
+
+   <button id='download-trigger'>
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-download"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
+        </button>
+      </div> 
    <form id='qr-form'>
       <input id='qr-url' type="url" placeholder="https://theameaarchives.com" />
       <button type="submit"> Generate </button>
@@ -119,7 +141,21 @@
         document.getElementById("qr-url").value
       );
     });
-    
+   
+    function downloadBase64Image(base64String, fileName) {
+      const link = document.createElement("a");
+      link.href = base64String;
+      link.download = fileName;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+
+    document.getElementById('download-trigger').addEventListener('click', () => {
+      const image = document.querySelector("#qr-code > img");
+      const dataImage = image.getAttribute("src");
+      downloadBase64Image(dataImage, 'qrcode.png');
+    });
   </script>
   </body>
 </html>
