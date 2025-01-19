@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR Code Generator - Amea Archives</title>
+    <script src="qrcode.min.js"></script>
+    
+</head>
+<body>
+    <header>
+      <img src="logo.svg" alt='amea-logo' />
+      <h2> QR Code Generator </h2>
+    </header>
+    <div class='generator'>
+   <div id='qr-code'></div> 
+   <form id='qr-form'>
+      <input id='qr-url' type="url" placeholder="https://theameaarchives.com" />
+      <button type="submit"> Generate </button>
+  </form>
+    </div>
+    <footer>
+      <p> Developed at <a href="https://theameaarchives.com/">Amea</a>. <a href="">Source Code</a></p>
+    </footer>
+  <script>
+    const qrCode = new QRCode(document.getElementById("qr-code"), {
+      text: 'https://theameaarchives.com/',
+      width: 256, height: 256,
+      colorDark: '#e9190f',
+      // colorDark: '#000000',
+      colorLight: '#ffffff',
+      correctLevel: QRCode.CorrectLevel.H
+    });
+
+    document.getElementById("qr-form").addEventListener("submit", (event) => {
+      event.preventDefault();
+
+      qrCode.clear();
+      qrCode.makeCode(
+        document.getElementById("qr-url").value
+      );
+    });
+    
+  </script>
+  <style>
+    :root {
+      --red-primary: #e9190f
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body: {
+      margin: 0 auto;
+    }
+    
+    header {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-evenly;
+      align-items: center;
+      width: 100%;
+    }
+    .generator {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-evenly;
+    }
+
+    .generator form {
+      display: flex;
+      flex-direction: column;
+      align-items: space-evenly;
+    }
+
+  </style>
+</body>
+</html>
