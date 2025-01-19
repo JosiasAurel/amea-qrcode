@@ -5,12 +5,91 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>QR Code Generator - Amea Archives</title>
     <script src="qrcode.min.js"></script>
+ <style>
+    :root {
+      --red-primary: #e9190f
+    }
+
+    * {
+      box-sizing: border-box;
+      font-family: sans-serif;
+    }
+
+    body {
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      height: 100vh;
+    }
     
+    header {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-evenly;
+      align-items: center;
+      width: 100vw;
+    }
+    .generator {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-evenly;
+    }
+
+    .generator form {
+      display: flex;
+      flex-direction: column;
+      align-items: space-evenly;
+      width: 40vw;
+    }
+
+    .generator form > * {
+      width: 100%; 
+    }
+
+    form input, form button {
+      padding: 1em 1.5em;
+      border: solid 1px black;
+      margin: 0.5em 0;
+      font-size: 1.1rem;
+    }
+
+    form input:focus {
+      outline: none;
+    }
+
+    form button {
+      border: none;
+      background-color: var(--red-primary);
+      color: white;
+    }
+
+    footer, footer * {
+      color: grey;
+    }
+
+    @media screen and (max-width: 600px) {
+      body {
+        margin: 0 auto;
+      }
+
+      #qr-code {
+        transform: scale(0.6);
+      }
+
+      .generator form {
+        width: 80vw;
+      }
+    }
+  </style>
 </head>
+
 <body>
     <header>
       <img src="logo.svg" alt='amea-logo' />
-      <h2> QR Code Generator </h2>
+      <h2> QR Code </h2>
     </header>
     <div class='generator'>
    <div id='qr-code'></div> 
@@ -20,12 +99,12 @@
   </form>
     </div>
     <footer>
-      <p> Developed at <a href="https://theameaarchives.com/">Amea</a>. <a href="">Source Code</a></p>
+      <p> Developed at <a href="https://theameaarchives.com/">Amea</a>. <a href="https://github.com/TheAmeaArchives/qrcode">Source Code</a></p>
     </footer>
   <script>
     const qrCode = new QRCode(document.getElementById("qr-code"), {
       text: 'https://theameaarchives.com/',
-      width: 256, height: 256,
+      width: 500, height: 500,
       colorDark: '#e9190f',
       // colorDark: '#000000',
       colorLight: '#ffffff',
@@ -42,39 +121,5 @@
     });
     
   </script>
-  <style>
-    :root {
-      --red-primary: #e9190f
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
-    body: {
-      margin: 0 auto;
-    }
-    
-    header {
-      display: flex;
-      flex-direction: row;
-      justify-content: space-evenly;
-      align-items: center;
-      width: 100%;
-    }
-    .generator {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      justify-content: space-evenly;
-    }
-
-    .generator form {
-      display: flex;
-      flex-direction: column;
-      align-items: space-evenly;
-    }
-
-  </style>
-</body>
+  </body>
 </html>
